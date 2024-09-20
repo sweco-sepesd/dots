@@ -11,8 +11,9 @@ template_by_filename = {
         , 62: numpy.array([[[236.0, 1671.0],[ 37.0, 1671.0],[ 37.0, 1472.0],[ 236.0, 1472.0]]], dtype=numpy.float32)
         , 203: numpy.array([[[46.0, 35.0],[ 245.0, 35.0],[ 245.0, 234.0],[ 46.0, 234.0]]], dtype=numpy.float32)
         , 23: numpy.array([[[1970.0, 28.0],[ 2169.0, 28.0],[ 2169.0, 227.0],[ 1970.0, 227.0]]], dtype=numpy.float32)
-    }, (2200,1700), (231,1474,246,1968))
+    }, (2200,1700), (234,1471,0,2200))
 }
+#cropped = img[start_row:end_row, start_col:end_col]
 
 def search_template(ids):
     matched = []
@@ -51,14 +52,28 @@ corners	vector of detected marker corners. For each marker, its four corners are
 ids	vector of identifiers of the detected markers. The identifier is of type int (e.g. std::vector<int>). For N detected markers, the size of ids is also N. The identifiers have the same order than the markers in the imgPoints array.
 rejectedImgPoints	contains the imgPoints of those squares whose inner code has not a correct codification. Useful for debugging purposes.
 '''
-capture = cv2.VideoCapture(0)
+#capture = cv2.VideoCapture(0)
+capture = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+#capture.set(cv2.CAP_PROP_FRAME_WIDTH, 2592)
+#capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1944)
+#capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+#capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
 #possible = capture.set(cv2.CAP_PROP_MODE, cv2.CAP_MODE_GRAY)
 #print(possible)
 i = 0
 do_crop = args.crop
 do_resize = True
-do_threshold = True
+do_threshold = 0
 do_blur = True
+do_fullscreen = False
+do_warp = False
+
+if do_fullscreen:
+    cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 while True:
     ok, im = capture.read()
     if not ok: continue
@@ -71,7 +86,6 @@ while True:
         continue
     filename, markers, size, roi = matched
     i += 1
-    print(i, len(markers), filename)
     pts_src = []
     pts_dst = []
     for id in markers.keys():
@@ -79,13 +93,13 @@ while True:
         pts_dst.append(markers[id].reshape((4,2)))
         
     h, status = cv2.findHomography(numpy.concatenate(pts_src), numpy.concatenate(pts_dst))
-
-
-    im = cv2.warpPerspective(im, h, size)
-    if do_crop:
-        #cropped = img[start_row:end_row, start_col:end_col]
-        start_row, end_row, start_col, end_col = roi
-        im = im[start_row:end_row, start_col:end_col]
+    
+    if do_warp:
+        im = cv2.warpPerspective(im, h, size)
+        if do_crop:
+            #cropped = img[start_row:end_row, start_col:end_col]
+            start_row, end_row, start_col, end_col = roi
+            im = im[start_row:end_row, start_col:end_col]
     if do_resize:
         h, w = im.shape
         im = cv2.resize(im, (w // 2, h // 2), interpolation=cv2.INTER_NEAREST_EXACT)
@@ -94,9 +108,12 @@ while True:
     if do_blur:
         im = cv2.GaussianBlur(im, (7, 7), 0)
     if do_threshold:
-        (T, im) = cv2.threshold(im, 0, 255,	cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
-    #im = cv2.adaptiveThreshold(im,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,3)
+        if 1 == do_threshold:
+            (T, im) = cv2.threshold(im, 0, 255,	cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+        elif 2 == do_threshold:
+            im = cv2.adaptiveThreshold(im,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,11,3)
     
+    print(i, len(markers), filename, im.shape)
     cv2.imshow('image', im)
     k = cv2.waitKey(10) & 0XFF
     if k == 27:
@@ -106,10 +123,26 @@ while True:
     elif k == ord('r'):
         do_resize = not do_resize
     elif k == ord('t'):
-        do_threshold = not do_threshold
+        do_threshold = (do_threshold + 1) % 3
     elif k == ord('b'):
         do_blur = not do_blur
+    elif k == ord('w'):
+        do_warp = not do_warp
+    elif k == ord('f'):
+        do_fullscreen = not do_fullscreen
+        cv2.destroyWindow('image')
+        if do_fullscreen:
+            cv2.namedWindow('image', cv2.WINDOW_NORMAL)
+            cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     
+'''
+im = cv.imread(cv.samples.findFile("lena.jpg"))
+cv.namedWindow("foo", cv.WINDOW_NORMAL)
+cv.setWindowProperty("foo", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
+cv.imshow("foo", im)
+cv.waitKey()
+cv.destroyWindow("foo")
+'''
 capture.release()
 cv2.destroyAllWindows()
 
