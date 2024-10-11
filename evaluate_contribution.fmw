@@ -1,0 +1,724 @@
+#! <?xml version="1.0" encoding="UTF-8" ?>
+#! <WORKSPACE
+#    Command line to run this workspace:
+#        "C:\Program Files\FME23783\fme.exe" C:\Users\sepesd\projekt\dots\evaluate_contribution.fmw
+#          --SourceDataset_PNGRASTER "$(FME_MF_DIR)samples\peter.segerstedt@sweco.se.png"
+#          --FME_LAUNCH_VIEWER_APP "YES"
+#    
+#!   A0_PREVIEW_IMAGE="data:image/png;base64,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"
+#!   ARCGIS_COMPATIBILITY="ARCGIS_AUTO"
+#!   ATTR_TYPE_ENCODING="SDF"
+#!   BEGIN_PYTHON=""
+#!   BEGIN_TCL=""
+#!   CATEGORY=""
+#!   DESCRIPTION=""
+#!   DESTINATION="NONE"
+#!   DESTINATION_ROUTING_FILE=""
+#!   DOC_EXTENTS="1109.01 73.5024"
+#!   DOC_TOP_LEFT="-1451.89 25.876"
+#!   END_PYTHON=""
+#!   END_TCL=""
+#!   EXPLICIT_BOOKMARK_ORDER="false"
+#!   FME_BUILD_NUM="23783"
+#!   FME_BULK_MODE_THRESHOLD="2000"
+#!   FME_DOCUMENT_GUID="d9fab49c-1faf-468a-a916-2a36bb89aa53"
+#!   FME_DOCUMENT_PRIORGUID=""
+#!   FME_GEOMETRY_HANDLING="Enhanced"
+#!   FME_IMPLICIT_CSMAP_REPROJECTION_MODE="Auto"
+#!   FME_NAMES_ENCODING="UTF-8"
+#!   FME_REPROJECTION_ENGINE="FME"
+#!   FME_SERVER_SERVICES=""
+#!   FME_STROKE_MAX_DEVIATION="0"
+#!   HISTORY=""
+#!   IGNORE_READER_FAILURE="No"
+#!   LAST_SAVE_BUILD="FME(R) 2023.2.3.0 (20240313 - Build 23783 - WIN64)"
+#!   LAST_SAVE_DATE="2024-10-11T12:52:56"
+#!   LOG_FILE=""
+#!   LOG_MAX_RECORDED_FEATURES="200"
+#!   MARKDOWN_DESCRIPTION=""
+#!   MARKDOWN_USAGE=""
+#!   MAX_LOG_FEATURES="200"
+#!   MULTI_WRITER_DATASET_ORDER="BY_ID"
+#!   PASSWORD=""
+#!   PYTHON_COMPATIBILITY="39"
+#!   REDIRECT_TERMINATORS="NONE"
+#!   SAVE_ON_PROMPT_AND_RUN="Yes"
+#!   SHOW_ANNOTATIONS="true"
+#!   SHOW_INFO_NODES="true"
+#!   SOURCE="NONE"
+#!   SOURCE_ROUTING_FILE=""
+#!   TERMINATE_REJECTED="YES"
+#!   TITLE=""
+#!   USAGE=""
+#!   USE_MARKDOWN=""
+#!   VIEW_POSITION="-1650.02 334.378"
+#!   WARN_INVALID_XFORM_PARAM="Yes"
+#!   WORKSPACE_VERSION="1"
+#!   ZOOM_SCALE="100"
+#! >
+#! <DATASETS>
+#! <DATASET
+#!   IS_SOURCE="true"
+#!   ROLE="READER"
+#!   FORMAT="PNGRASTER"
+#!   DATASET="$(SourceDataset_PNGRASTER)"
+#!   KEYWORD="PNGRASTER_1"
+#!   MULTI_GEOM_ALLOWED="false"
+#!   ATTR_MAX_LENGTH="0"
+#!   ATTR_CASE="ANY"
+#!   ALLOWED_FEAT_TYPES=""
+#!   WRITE_DEFS="true"
+#!   DEFLINE_TEMPLATE=""
+#!   DEFLINE_ATTRS="true"
+#!   EXPOSABLE_ATTRS="fme_basename char(50) fme_color char(50) fme_dataset char(50) fme_feature_type char(50) fme_fill_color char(50) fme_geometry char(50) fme_primary_axis float fme_rotation float fme_secondary_axis float fme_start_angle float fme_sweep_angle float fme_text_size float fme_text_string char(50) fme_type char(50) multi_reader_full_id integer multi_reader_id integer multi_reader_keyword char(50) multi_reader_type char(50) pngraster_author char(255) pngraster_copyright char(255) pngraster_description char(255) pngraster_disclaimer char(255) pngraster_software char(255) pngraster_title char(255) pngraster_type char(255)"
+#!   DEFLINE_PARMS=""
+#!   ATTR_INDEX_TYPES=""
+#!   ATTR_NAME_INVALID_CHARS=""
+#!   SUPPORTS_FEATURE_TYPE_FANOUT="true"
+#!   ENABLED="true"
+#!   DYNAMIC_FEATURE_TYPES_LIST_ON_MERGE="true"
+#!   DATASET_TYPE="FILEDIR"
+#!   FTTR_TYPE="LISTBOX_ENCODED"
+#!   GENERATE_FME_BUILD_NUM="23783"
+#!   COORDSYS=""
+#!   FEATURE_TYPES=""
+#!   MAX_FEATURES=""
+#!   MAX_FEATURES_PER_FEATURE_TYPE=""
+#!   MIN_FEATURES=""
+#!   START_FEATURE=""
+#! >
+#! <METAFILE_PARAMETER
+#!   NAME="AUTO_FANOUT_ATTRIBUTE"
+#!   VALUE="fme_basename"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="FEATURE_TYPE_DEFAULT_NAME"
+#!   VALUE="Raster1"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="FEATURE_TYPE_NAME"
+#!   VALUE="Raster File"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="MIME_TYPE"
+#!   VALUE="image/PNG"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="READER_AUTO_EXPOSE"
+#!   VALUE="fme_basename char(50)"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="READER_DATASET_HINT"
+#!   VALUE="Select the PNG raster file(s)"
+#! />
+#! <METAFILE_PARAMETER
+#!   NAME="WRITER_DATASET_HINT"
+#!   VALUE="Specify a folder for the PNG raster file"
+#! />
+#! </DATASET>
+#! </DATASETS>
+#! <DATA_TYPES>
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_varchar(width)"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_varbinary(width)"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_char(width)"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(width)"
+#!   FME_TYPE="fme_binary(width)"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_buffer"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_binarybuffer"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_xml"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="char(254)"
+#!   FME_TYPE="fme_json"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="datetime"
+#!   FME_TYPE="fme_datetime"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="time"
+#!   FME_TYPE="fme_time"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="date"
+#!   FME_TYPE="fme_date"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="decimal(width,decimal)"
+#!   FME_TYPE="fme_decimal(width,decimal)"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="float"
+#!   FME_TYPE="fme_real64"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="float"
+#!   FME_TYPE="fme_real32"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="integer"
+#!   FME_TYPE="fme_int32"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="largeint"
+#!   FME_TYPE="fme_int64"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="decimal(20,0)"
+#!   FME_TYPE="fme_uint64"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="largeint"
+#!   FME_TYPE="fme_uint32"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="logical"
+#!   FME_TYPE="fme_boolean"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="smallint"
+#!   FME_TYPE="fme_int16"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="integer"
+#!   FME_TYPE="fme_uint16"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="smallint"
+#!   FME_TYPE="fme_int8"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <DATA_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="smallint"
+#!   FME_TYPE="fme_uint8"
+#!   FORMAT="PNGRASTER"
+#! />
+#! </DATA_TYPES>
+#! <GEOM_TYPES>
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="pngraster_raster"
+#!   FME_TYPE="fme_raster"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="pngraster_none"
+#!   FME_TYPE="fme_no_geom"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_point"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_text"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_line"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_arc"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_area"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_ellipse"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_rectangle"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_rounded_rectangle"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_no_geom"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_surface"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_solid"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_point_cloud"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="fme_no_map"
+#!   FME_TYPE="fme_voxel_grid"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="pngraster_none"
+#!   FME_TYPE="fme_feature_table"
+#!   FORMAT="PNGRASTER"
+#! />
+#! <GEOM_TYPE
+#!   IS_SOURCE="true"
+#!   FORMAT_TYPE="pngraster_none"
+#!   FME_TYPE="fme_collection"
+#!   FORMAT="PNGRASTER"
+#! />
+#! </GEOM_TYPES>
+#! <FEATURE_TYPES>
+#! <FEATURE_TYPE
+#!   IS_SOURCE="true"
+#!   NODE_NAME="PNGRASTER"
+#!   FEATURE_TYPE_NAME=""
+#!   FEATURE_TYPE_NAME_QUALIFIER=""
+#!   IS_EDITABLE="false"
+#!   IDENTIFIER="2"
+#!   FEAT_GEOMTYPE="pngraster_raster"
+#!   POSITION="-1451.8897188971889 99.378343783437799"
+#!   BOUNDING_RECT="-1451.8897188971889 99.378343783437799 454 71"
+#!   ORDER="500000000000001"
+#!   COLLAPSED="false"
+#!   KEYWORD="PNGRASTER_1"
+#!   PARMS_EDITED="true"
+#!   ENABLED="true"
+#!   HIDDEN_USER_ATTRS=""
+#!   MERGE_FILTER=""
+#!   MERGE_FILTER_TYPE="FILTER_TYPE_GLOB"
+#!   MERGE_FILTER_CASE_SENSITIVE="true"
+#!   DYNAMIC_SCHEMA="false"
+#! >
+#!     <FEAT_ATTRIBUTE ATTR_NAME="fme_basename" ATTR_TYPE="char(50)"  EXPOSABLE_ATTR="true" ATTR_HAS_PORT="true" ATTR_VALUE=""/>
+#! </FEATURE_TYPE>
+#! </FEATURE_TYPES>
+#! <FMESERVER>
+#! <SERVICES>
+#! <SERVICE
+#!   NAME="fmejobsubmitter"
+#! >
+#! <PROPERTIES>
+#! <PROPERTY
+#!   CATEGORY="FMEUSERPROPDATA"
+#!   NAME="ADVANCED"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   CATEGORY="FMEUSERPROPDATA"
+#!   NAME="FAILURE_TOPICS"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   CATEGORY="FMEUSERPROPDATA"
+#!   NAME="HTTP_DATASET"
+#!   VALUE="PNGRASTER_1"
+#! />
+#! <PROPERTY
+#!   CATEGORY="FMEUSERPROPDATA"
+#!   NAME="NOTIFICATION_WRITER"
+#!   VALUE=""
+#! />
+#! <PROPERTY
+#!   CATEGORY="FMEUSERPROPDATA"
+#!   NAME="SUCCESS_TOPICS"
+#!   VALUE=""
+#! />
+#! </PROPERTIES>
+#! </SERVICE>
+#! </SERVICES>
+#! <REPOSITORY
+#!   NAME="CONNECT_THE_DOTS"
+#! />
+#! <ITEM
+#!   NAME="evaluate_contribution.fmw"
+#! />
+#! <MODIFICATIONS>
+#! <MODIFICATION
+#!   UID=":DatasetMgr_PNGRASTER_1:SourceDataset_PNGRASTER_1"
+#!   VALUE="$(SourceDataset_PNGRASTER)"
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SERVER_DEST_DIR"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_BACKUP"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_DASHBOARD"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_DATA"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_ENGINE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_LOG"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_SYSTEM"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_SHAREDRESOURCE_TEMP"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:FME_TOPIC_MESSAGE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":GlobalParameterMgr:SourceDataset_PNGRASTER"
+#!   VALUE="$(FME_MF_DIR)samples\peter.segerstedt@sweco.se.png"
+#! />
+#! <MODIFICATION
+#!   UID=":WBDoc:DESTINATION_ROUTING_FILE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":WBDoc:LOG_FILE"
+#!   VALUE=""
+#! />
+#! <MODIFICATION
+#!   UID=":WBDoc:SOURCE_ROUTING_FILE"
+#!   VALUE=""
+#! />
+#! </MODIFICATIONS>
+#! <READER_DATASETS>
+#! <DATASET
+#!   NAME="PNGRASTER_1"
+#!   OVERRIDE="-PNGRASTER_1_DATASET"
+#!   DATASET="PNGRASTER_1/peter.segerstedt@sweco.se.png"
+#! />
+#! </READER_DATASETS>
+#! </FMESERVER>
+#! <GLOBAL_PARAMETERS>
+#! <GLOBAL_PARAMETER
+#!   GUI_LINE="GUI MULTIFILE SourceDataset_PNGRASTER INCLUDE_WEB_BROWSER%PNGRASTER_Files(*.png)|*.png|Archive_Files(*.7z;*.7zip;*.rar;*.rvz;*.tar;*.tar.bz2;*.tar.gz;*.tgz;*.zip;*.zipx)|*.7z;*.7zip;*.rar;*.rvz;*.tar;*.tar.bz2;*.tar.gz;*.tgz;*.zip;*.zipx|Compressed_Files(*.bz2;*.gz)|*.bz2;*.gz|All_Files(*)|* Source PNG (Portable Network Graphics) File(s):"
+#!   DEFAULT_VALUE="$(FME_MF_DIR)samples\peter.segerstedt@sweco.se.png"
+#!   IS_STAND_ALONE="false"
+#! />
+#! </GLOBAL_PARAMETERS>
+#! <USER_PARAMETERS
+#!   FORM="eyJwYXJhbWV0ZXJzIjpbeyJhY2Nlc3NNb2RlIjoicmVhZCIsImRlZmF1bHRWYWx1ZSI6IiQoRk1FX01GX0RJUilzYW1wbGVzXFxwZXRlci5zZWdlcnN0ZWR0QHN3ZWNvLnNlLnBuZyIsImZpbHRlcnMiOlt7ImRlc2NyaXB0aW9uIjoiUE5HUkFTVEVSIEZpbGVzIiwiZmlsdGVyIjpbIioucG5nIl19LHsiZGVzY3JpcHRpb24iOiJBcmNoaXZlIEZpbGVzIiwiZmlsdGVyIjpbIiouN3oiLCIqLjd6aXAiLCIqLnJhciIsIioucnZ6IiwiKi50YXIiLCIqLnRhci5iejIiLCIqLnRhci5neiIsIioudGd6IiwiKi56aXAiLCIqLnppcHgiXX0seyJkZXNjcmlwdGlvbiI6IkNvbXByZXNzZWQgRmlsZXMiLCJmaWx0ZXIiOlsiKi5iejIiLCIqLmd6Il19LHsiZGVzY3JpcHRpb24iOiJBbGwgRmlsZXMiLCJmaWx0ZXIiOlsiKiJdfV0sImluY2x1ZGVXZWJCcm93c2VyIjp0cnVlLCJpdGVtc1RvU2VsZWN0IjoiZmlsZXMiLCJuYW1lIjoiU291cmNlRGF0YXNldF9QTkdSQVNURVIiLCJwcm9tcHQiOiJTb3VyY2UgUE5HIChQb3J0YWJsZSBOZXR3b3JrIEdyYXBoaWNzKSBGaWxlKHMpOiIsInJlcXVpcmVkIjp0cnVlLCJzZWxlY3RNdWx0aXBsZSI6dHJ1ZSwic3VwcG9ydGVkVmFsdWVUeXBlcyI6WyJnbG9iYWxQYXJhbWV0ZXIiXSwidHlwZSI6ImZpbGUiLCJ2YWxpZGF0ZUV4aXN0ZW5jZSI6ZmFsc2UsInZhbHVlVHlwZSI6InN0cmluZyJ9XX0="
+#! >
+#! <PARAMETER_INFO>
+#!     <INFO NAME="SourceDataset_PNGRASTER" 
+#!   DEFAULT_VALUE="$(FME_MF_DIR)samples\peter.segerstedt@sweco.se.png"
+#!   SCOPE="DEPENDENT"
+#!   GENERATED_GUI_LINE="true"
+#!   GUI_LINE="GUI MULTIFILE SourceDataset_PNGRASTER INCLUDE_WEB_BROWSER%PNGRASTER_Files(*.png)|*.png|Archive_Files(*.7z;*.7zip;*.rar;*.rvz;*.tar;*.tar.bz2;*.tar.gz;*.tgz;*.zip;*.zipx)|*.7z;*.7zip;*.rar;*.rvz;*.tar;*.tar.bz2;*.tar.gz;*.tgz;*.zip;*.zipx|Compressed_Files(*.bz2;*.gz)|*.bz2;*.gz|All_Files(*)|* Source PNG (Portable Network Graphics) File(s):"
+#! />
+#! </PARAMETER_INFO>
+#! </USER_PARAMETERS>
+#! <COMMENTS>
+#! </COMMENTS>
+#! <CONSTANTS>
+#! </CONSTANTS>
+#! <BOOKMARKS>
+#! </BOOKMARKS>
+#! <TRANSFORMERS>
+#! <TRANSFORMER
+#!   IDENTIFIER="3"
+#!   TYPE="Logger"
+#!   VERSION="4"
+#!   POSITION="-796.88296882968825 96.875968759687595"
+#!   BOUNDING_RECT="-796.88296882968825 96.875968759687595 454 71"
+#!   ORDER="500000000000002"
+#!   PARMS_EDITED="false"
+#!   ENABLED="true"
+#!   LAST_PARM_EDIT="23783"
+#! >
+#!     <OUTPUT_FEAT NAME="LOGGED"/>
+#!     <FEAT_COLLAPSED COLLAPSED="0"/>
+#!     <XFORM_ATTR ATTR_NAME="fme_basename" IS_USER_CREATED="false" FEAT_INDEX="0" />
+#!     <XFORM_PARM PARM_NAME="FEATURE_TYPE" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="LOG_FEATURE" PARM_VALUE="LOG_ONLY"/>
+#!     <XFORM_PARM PARM_NAME="MAXCOORDS" PARM_VALUE="20"/>
+#!     <XFORM_PARM PARM_NAME="MAXFEATS" PARM_VALUE="20"/>
+#!     <XFORM_PARM PARM_NAME="MESSAGE" PARM_VALUE="Feature is:"/>
+#!     <XFORM_PARM PARM_NAME="MSG_GRP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="PARAMETERS_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="SEVERITY" PARM_VALUE="INFO"/>
+#!     <XFORM_PARM PARM_NAME="TRANSFORMER_GROUP" PARM_VALUE=""/>
+#!     <XFORM_PARM PARM_NAME="XFORMER_NAME" PARM_VALUE="Logger"/>
+#! </TRANSFORMER>
+#! </TRANSFORMERS>
+#! <FEAT_LINKS>
+#! <FEAT_LINK
+#!   IDENTIFIER="4"
+#!   SOURCE_NODE="2"
+#!   TARGET_NODE="3"
+#!   SOURCE_PORT_DESC="-1"
+#!   TARGET_PORT_DESC="fi 0 "
+#!   ENABLED="true"
+#!   EXECUTION_IDX="0"
+#!   HIDDEN="false"
+#!   COLOUR="0.30196078431372547,0.30196078431372547,0.30196078431372547,1"
+#!   PEN_WIDTH="4"
+#!   PEN_STYLE="1"
+#!   LINK_STYLE_NAME="&lt;Default&gt;"
+#!   EXTRA_POINTS=""
+#! />
+#! </FEAT_LINKS>
+#! <BREAKPOINTS>
+#! </BREAKPOINTS>
+#! <ATTR_LINKS>
+#! </ATTR_LINKS>
+#! <SUBDOCUMENTS>
+#! </SUBDOCUMENTS>
+#! <LOOKUP_TABLES>
+#! </LOOKUP_TABLES>
+#! </WORKSPACE>
+
+FME_PYTHON_VERSION 39
+ARCGIS_COMPATIBILITY ARCGIS_AUTO
+GUI IGNORE SourceDataset_PNGRASTER_1,PNGRASTER_IN_USE_SEARCH_ENVELOPE_PNGRASTER_1,PNGRASTER_IN_SEARCH_ENVELOPE_MINX_PNGRASTER_1,PNGRASTER_IN_SEARCH_ENVELOPE_MINY_PNGRASTER_1,PNGRASTER_IN_SEARCH_ENVELOPE_MAXX_PNGRASTER_1,PNGRASTER_IN_SEARCH_ENVELOPE_MAXY_PNGRASTER_1,PNGRASTER_IN_SEARCH_ENVELOPE_COORDINATE_SYSTEM_PNGRASTER_1,PNGRASTER_IN_CLIP_TO_ENVELOPE_PNGRASTER_1,PNGRASTER_IN_NETWORK_AUTHENTICATION_PNGRASTER_1
+# ============================================================================
+DEFAULT_MACRO SourceDataset_PNGRASTER $(FME_MF_DIR)samples\peter.segerstedt@sweco.se.png
+
+# ============================================================================
+INCLUDE [ if {{$(SourceDataset_PNGRASTER$encode)} == {}} { puts_real {Parameter 'SourceDataset_PNGRASTER' must be given a value.}; exit 1; }; ]
+#! START_HEADER
+#! START_WB_HEADER
+READER_TYPE MULTI_READER
+MULTI_READER_TYPE{0} PNGRASTER
+MULTI_READER_KEYWORD{0} PNGRASTER_1
+MULTI_READER_GEN_DIRECTIVES{0} SEARCH_ENVELOPE_MAXY,0,CLIP_TO_ENVELOPE,NO,READER_META_ATTRIBUTES,fme_dataset<space>fme_basename,_MERGE_SCHEMAS,YES,USE_SEARCH_ENVELOPE,NO,SEARCH_ENVELOPE_COORDINATE_SYSTEM,,SEARCH_ENVELOPE_MINY,0,EXPOSE_ATTRS_GROUP,,SEARCH_ENVELOPE_MAXX,0,SEARCH_ENVELOPE_MINX,0,PNGRASTER_EXPOSE_FORMAT_ATTRS,,GROUP_BY_DATASET,No
+WRITER_TYPE MULTI_WRITER
+WRITER_KEYWORD MULTI_DEST
+MULTI_DEST_DATASET null
+#! END_WB_HEADER
+#! START_WB_HEADER
+MACRO WB_KEYWORD "PNGRASTER_1"
+#! END_WB_HEADER
+#! START_SOURCE_HEADER PNGRASTER PNGRASTER_1
+# =======================================================================
+# The following GUI line prompts for a file to be used as the source PNGRASTER file.
+# The user input is stored in a macro, which is then used to define
+# the dataset to be read.
+# The dataset this mapping file was generated from was:
+#! END_SOURCE_HEADER
+#! START_WB_HEADER
+DEFAULT_MACRO SourceDataset
+INCLUDE [ if {{$(SourceDataset)} != ""} {                        \
+ puts {DEFAULT_MACRO SourceDataset_PNGRASTER_1 $(SourceDataset)}     \
+ } ]
+#! END_WB_HEADER
+#! START_SOURCE_HEADER PNGRASTER PNGRASTER_1
+DEFAULT_MACRO SourceDataset_PNGRASTER_1 $(SourceDataset_PNGRASTER)
+GUI MULTIFILE SourceDataset_PNGRASTER_1 PNGRASTER_Files(*.png)|*.png|All_Files(*)|* Source PNG (Portable Network Graphics) File(s):
+DEFAULT_MACRO PNGRASTER_IN_READER_META_ATTRIBUTES_PNGRASTER_1 fme_dataset fme_basename
+PNGRASTER_1_READER_META_ATTRIBUTES "$(PNGRASTER_IN_READER_META_ATTRIBUTES_PNGRASTER_1)"
+DEFAULT_MACRO PNGRASTER_IN_GROUP_BY_DATASET_PNGRASTER_1 No
+PNGRASTER_1_GROUP_BY_DATASET "$(PNGRASTER_IN_GROUP_BY_DATASET_PNGRASTER_1)"
+DEFAULT_MACRO PNGRASTER_IN_EXPOSE_ATTRS_GROUP_PNGRASTER_1 
+PNGRASTER_1_EXPOSE_ATTRS_GROUP "$(PNGRASTER_IN_EXPOSE_ATTRS_GROUP_PNGRASTER_1)"
+# Include this file in source setting section to add external search envelope processing
+# Zero as a default means we don't do any search -- this makes workbench happier
+DEFAULT_MACRO PNGRASTER_IN_USE_SEARCH_ENVELOPE_PNGRASTER_1 NO
+PNGRASTER_1_USE_SEARCH_ENVELOPE "$(PNGRASTER_IN_USE_SEARCH_ENVELOPE_PNGRASTER_1)"
+GUI ACTIVEDISCLOSUREGROUP PNGRASTER_IN_USE_SEARCH_ENVELOPE_PNGRASTER_1 PNGRASTER_IN_SEARCH_ENVELOPE_MINX_PNGRASTER_1%PNGRASTER_IN_SEARCH_ENVELOPE_MINY_PNGRASTER_1%PNGRASTER_IN_SEARCH_ENVELOPE_MAXX_PNGRASTER_1%PNGRASTER_IN_SEARCH_ENVELOPE_MAXY_PNGRASTER_1%PNGRASTER_IN_SEARCH_ENVELOPE_COORDINATE_SYSTEM_PNGRASTER_1%PNGRASTER_IN_CLIP_TO_ENVELOPE_PNGRASTER_1%PNGRASTER_IN_SEARCH_METHOD%PNGRASTER_IN_SEARCH_METHOD_FILTER%PNGRASTER_IN_SEARCH_ORDER%PNGRASTER_IN_SEARCH_FEATURE%PNGRASTER_IN_DUMMY_SEARCH_ENVELOPE_PARAMETER Use Search Envelope
+# ===========================================================================
+GUI LOOKUP PNGRASTER_IN_SEARCH_ENVELOPE_MINX_PNGRASTER_1 <Unused>,0 
+DEFAULT_MACRO PNGRASTER_IN_SEARCH_ENVELOPE_MINX_PNGRASTER_1 0
+PNGRASTER_1_SEARCH_ENVELOPE "$(PNGRASTER_IN_SEARCH_ENVELOPE_MINX_PNGRASTER_1)"
+GUI OPTIONAL FLOAT PNGRASTER_IN_SEARCH_ENVELOPE_MINX_PNGRASTER_1 Minimum X:
+# ===========================================================================
+GUI LOOKUP PNGRASTER_IN_SEARCH_ENVELOPE_MINY_PNGRASTER_1 <Unused>,0 
+DEFAULT_MACRO PNGRASTER_IN_SEARCH_ENVELOPE_MINY_PNGRASTER_1 0
+PNGRASTER_1_SEARCH_ENVELOPE "$(PNGRASTER_IN_SEARCH_ENVELOPE_MINY_PNGRASTER_1)"
+GUI OPTIONAL FLOAT PNGRASTER_IN_SEARCH_ENVELOPE_MINY_PNGRASTER_1 Minimum Y:
+# ===========================================================================
+GUI LOOKUP PNGRASTER_IN_SEARCH_ENVELOPE_MAXX_PNGRASTER_1 <Unused>,0 
+DEFAULT_MACRO PNGRASTER_IN_SEARCH_ENVELOPE_MAXX_PNGRASTER_1 0
+PNGRASTER_1_SEARCH_ENVELOPE "$(PNGRASTER_IN_SEARCH_ENVELOPE_MAXX_PNGRASTER_1)"
+GUI OPTIONAL FLOAT PNGRASTER_IN_SEARCH_ENVELOPE_MAXX_PNGRASTER_1 Maximum X:
+# ===========================================================================
+GUI LOOKUP PNGRASTER_IN_SEARCH_ENVELOPE_MAXY_PNGRASTER_1 <Unused>,0 
+DEFAULT_MACRO PNGRASTER_IN_SEARCH_ENVELOPE_MAXY_PNGRASTER_1 0
+PNGRASTER_1_SEARCH_ENVELOPE "$(PNGRASTER_IN_SEARCH_ENVELOPE_MAXY_PNGRASTER_1)"
+GUI OPTIONAL FLOAT PNGRASTER_IN_SEARCH_ENVELOPE_MAXY_PNGRASTER_1 Maximum Y:
+# ===========================================================================
+GUI LOOKUP PNGRASTER_IN_SEARCH_ENVELOPE_COORDINATE_SYSTEM_PNGRASTER_1 <Unused>, 
+DEFAULT_MACRO PNGRASTER_IN_SEARCH_ENVELOPE_COORDINATE_SYSTEM_PNGRASTER_1 
+PNGRASTER_1_SEARCH_ENVELOPE "$(PNGRASTER_IN_SEARCH_ENVELOPE_COORDINATE_SYSTEM_PNGRASTER_1)"
+GUI OPTIONAL COORDSYS PNGRASTER_IN_SEARCH_ENVELOPE_COORDINATE_SYSTEM_PNGRASTER_1 Search Envelope Coordinate System:
+# ===========================================================================
+# BUG18999: We now have a soft clip to fall back on like native spatial index
+# thus we are reintroducing the clip to envelop as an option for users.
+# Defualt to soft clip as per the existing database readers we are emulating
+GUI LOOKUP PNGRASTER_IN_CLIP_TO_ENVELOPE_PNGRASTER_1 <Unused>,NO 
+DEFAULT_MACRO PNGRASTER_IN_CLIP_TO_ENVELOPE_PNGRASTER_1 NO
+PNGRASTER_1_CLIP_TO_ENVELOPE "$(PNGRASTER_IN_CLIP_TO_ENVELOPE_PNGRASTER_1)"
+GUI OPTIONAL CHECKBOX PNGRASTER_IN_CLIP_TO_ENVELOPE_PNGRASTER_1 YES%NO Clip to Search Envelope
+# ===========================================================================
+DEFAULT_MACRO PNGRASTER_IN_NETWORK_AUTHENTICATION_PNGRASTER_1 
+PNGRASTER_1_NETWORK_AUTHENTICATION "$(PNGRASTER_IN_NETWORK_AUTHENTICATION_PNGRASTER_1)"
+GUI OPTIONAL AUTHENTICATOR PNGRASTER_IN_NETWORK_AUTHENTICATION_PNGRASTER_1 CONTAINER%GROUP%CONTAINER_TITLE%"Network Authentication"%PROMPT_TYPE%NETWORK Network Authentication
+# ============================================================================
+DEFAULT_MACRO PNGRASTER_IN_ATTRIBUTE_READING_PNGRASTER_1 ALL
+PNGRASTER_1_ATTRIBUTE_READING "$(PNGRASTER_IN_ATTRIBUTE_READING_PNGRASTER_1)"
+# ============================================================================
+PNGRASTER_1_GENERATE_FME_BUILD_NUM 23783
+PNGRASTER_1_DATASET "$(SourceDataset_PNGRASTER_1)"
+#! END_SOURCE_HEADER
+#! START_WB_HEADER
+#! END_WB_HEADER
+#! END_HEADER
+
+LOG_FILENAME "$(FME_MF_DIR)evaluate_contribution.log"
+LOG_APPEND NO
+LOG_TIMINGS YES
+FME_DEBUG MAPPING_FILE BADNEWS UNGROUPED UNCORRELATED DUMP_SCHEMA XSD_VERBOSE HTTP_DEBUG FTP_DEBUG FME_DEBUG STASH
+LOG_FILTER_MASK -1
+LOG_MAX_FEATURES 200
+LOG_MAX_RECORDED_FEATURES 200
+FME_REPROJECTION_ENGINE FME
+FME_IMPLICIT_CSMAP_REPROJECTION_MODE Auto
+FME_GEOMETRY_HANDLING Enhanced
+FME_STROKE_MAX_DEVIATION 0
+FME_NAMES_ENCODING UTF-8
+FME_BULK_MODE_THRESHOLD 2000
+LAST_SAVE_BUILD "FME 2023.2.3.0 (20240313 - Build 23783 - WIN64)"
+DEFAULT_MACRO DATASET_KEYWORD_PNGRASTER_1 PNGRASTER_1
+# -------------------------------------------------------------------------
+
+PNGRASTER_1_READER_META_ATTRIBUTES fme_feature_type fme_basename
+
+# -------------------------------------------------------------------------
+
+MULTI_READER_CONTINUE_ON_READER_FAILURE No
+
+# -------------------------------------------------------------------------
+
+MACRO WORKSPACE_NAME evaluate_contribution
+MACRO FME_VIEWER_APP fmedatainspector
+# -------------------------------------------------------------------------
+PNGRASTER_1_DEF PNGRASTER
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * RoutingFactory   FACTORY_NAME "Router and Unexpected Input Remover"   COMMAND_PARM_EVALUATION SINGLE_PASS   MULTI_READER_KEYWORD $(DATASET_KEYWORD_PNGRASTER_1)   INPUT FEATURE_TYPE *    ROUTE PNGRASTER PNGRASTER_1::PNGRASTER multi_reader_keyword,$(DATASET_KEYWORD_PNGRASTER_1) TO FME_GENERIC ::PNGRASTER ALIAS_GEOMETRY    MERGE_INPUT Yes   OUTPUT ROUTED FEATURE_TYPE *
+PNGRASTER_1_MERGE_DEF PNGRASTER_1::PNGRASTER EXACT PNGRASTER
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * TeeFactory    FACTORY_NAME "PNGRASTER_PNGRASTER_1 Splitter"    INPUT FEATURE_TYPE PNGRASTER    OUTPUT FEATURE_TYPE PNGRASTER_PNGRASTER_1
+DEFAULT_MACRO WB_CURRENT_CONTEXT
+# -------------------------------------------------------------------------
+# Create a FME_UUID_SAFE from the FME_UUID so we can use it for Tcl identifiers (FMEDESKTOP-11308)
+INCLUDE [ FME_CleanseFMEUUID {Logger_0b21ce05_70f4_42fc_af95_7efca6da0c3d0} ]
+# If the Logger was in a custom transformer, the custom transformer's name was not being
+# properly logged -- instead we saw "$(<customXformerName_WORKSPACE_NAME)" being logged as the prefix of the
+# message. By deferencing and expanding out the XFORMER_NAME below, and then "WWJD" encoding it when it is
+# used in the @Log call via the $encode macro name suffix trick, we get the right result, and the right result
+# safely.
+MACRO LOGGABLE_XFORMER_NAME Logger
+FACTORY_DEF {*} TeeFactory    FACTORY_NAME { Logger_Logger }    INPUT  FEATURE_TYPE PNGRASTER_PNGRASTER_1    OUTPUT { FEATURE_TYPE Logger_LOGGED                  @Log(ENCODED, "$(LOGGABLE_XFORMER_NAME$encode):<space>Feature is:","20","20","",INFO,LOG_ONLY,$(FME_UUID_SAFE))                   }
+FACTORY_DEF * TeeFactory   FACTORY_NAME "Logger LOGGED Transformer Output Nuker"   INPUT FEATURE_TYPE Logger_LOGGED
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * RoutingFactory FACTORY_NAME "Destination Feature Type Routing Correlator"   COMMAND_PARM_EVALUATION SINGLE_PASS   INPUT FEATURE_TYPE *   FEATURE_TYPE_ATTRIBUTE __wb_out_feat_type__   OUTPUT ROUTED FEATURE_TYPE *    OUTPUT NOT_ROUTED FEATURE_TYPE __nuke_me__ @Tcl2("FME_StatMessage 818059 [FME_GetAttribute fme_template_feature_type] 818060 818061 fme_warn")
+# -------------------------------------------------------------------------
+
+FACTORY_DEF * TeeFactory   FACTORY_NAME "Final Output Nuker"   INPUT FEATURE_TYPE __nuke_me__
+
