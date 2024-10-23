@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Flask Video Stream</title>
+</head>
+<body>
+    <h1>Video Stream</h1>
+    <img src="{{ url_for('video_feed') }}" alt="Video feed">
+    <button id="saveBtn">Save Image</button>
+
+    <script>
+        document.getElementById("saveBtn").onclick = function() {
+            fetch('/save_image')
+                .then(response => response.text())
+                .then(data => alert(data));
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweco Competition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        #entryForm {
+            display: none;
+            margin-top: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to the Sweco Connect The Dots Competition!</h1>
+    <p>We are excited to have you participate. Please create your entry below.</p>
+    
+    <button id="createEntryButton">Create New Competition Entry</button>
+
+    <div id="entryForm">
+        <h2>Competition Entry Form</h2>
+
+		<form method="POST">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+			<input type="submit" value="Submit Entry">
+        </form>
+
+    </div>
+
+    <script>
+        document.getElementById('createEntryButton').onclick = function() {
+            var form = document.getElementById('entryForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        };
+    </script>
+    
+</body>
+</html>
