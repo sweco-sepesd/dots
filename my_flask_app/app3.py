@@ -26,6 +26,7 @@ def home():
 
 @app.route('/submit', methods=['POST'])
 def run_script():
+    return render_template('close_window.html')
     # Logic to run your script here
     global image_uuid  # Use the global variable
     name = request.form['name']

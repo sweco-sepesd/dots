@@ -1,5 +1,5 @@
 import argparse
-from PIL import Image, ImageFilter
+#from PIL import Image, ImageFilter
 import cv2
 import numpy
 import uuid
@@ -144,14 +144,15 @@ def main():
             else:    
                 (T, im) = cv2.threshold(im, 0, 255,	cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
         if do_smooth:
+            pass
             # Convert to RGB and PIL image
-            frame_rgb = cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB)
-            pil_image = Image.fromarray(frame_rgb)
+            #frame_rgb = cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB)
+            #pil_image = Image.fromarray(frame_rgb)
             #Filter
-            filtered_image = pil_image.filter(ImageFilter.MedianFilter(size=3))
+            #filtered_image = pil_image.filter(ImageFilter.MedianFilter(size=3))
 
             #Convert back to HSV and cv2
-            mask = cv2.cvtColor(numpy.array(filtered_image), cv2.COLOR_RGB2GRAY)
+            #mask = cv2.cvtColor(numpy.array(filtered_image), cv2.COLOR_RGB2GRAY)
 
 
         if do_mask == True:
