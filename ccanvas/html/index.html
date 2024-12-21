@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Collaborative Canvas</title>
+<style>
+.center {
+  border: 5px solid;
+  margin: auto;
+  width: 640px;
+  padding: 10px;
+}
+canvas {
+  background-color: lightyellow;
+}
+
+#wrapper1:fullscreen {
+  background-color: white;
+}
+input:invalid {box-shadow: 0 0 5px 1px red;}
+</style>
+
+<script>
+let state = {};
+function join(userName) {
+	return new Promise((resolve, reject) => {
+		state.websocket = new WebSocket("/ws");
+		state.websocket.onopen = function() {
+			console.log("connection opened");
+			state.websocket.send(`JOIN ${userName}` );
+			state.userName = userName;
+		}
+		state.websocket.onmessage = function(e) {
+			console.log("received message: ", e.data);
+			if(e.data.startsWith("OK JOIN [")){
+				// we joined successfully, others already connected will be listed as an array
+				state.others = JSON.parse(e.data.slice(8));
+			resolve(state);
+			}
+		}
+	});
+}
+function leave() {
+	return new Promise((resolve, reject) => {
+		state.websocket.send(`LEAVE ${state.userName}`);
+		
+		state.websocket.onclose = function() {
+			console.log("websocket closed");
+			state.userName = null;
+			resolve(state);
+		}
+		state.websocket.close();
+	});
+}
+</script>
+
+</head>
+<body>
+
+<div id="wrapper1" >
+<div id="toolbar" class="center">
+<a href="#">request control</a>
+<a href="#">release control</a>
+<div>
+<label for="uname">Username: </label>
+		<input id="inputUsername" type="text" placeholder="Please enter your name" required title="3-8 characters" pattern="[a-öA-Ö]{3,8}"></input>
+		<button id="submitUsername">join</button>
+<div>
+</div>
+<div id="wrapper2" class="center">
+<canvas id="my_canvas" width="640" height="480"> 
+</div>
+
+<div id="commandbar" class="center">
+<input id="commandinput" type="text" placeholder="$"></input>
+</div>
+</div>
+<script>
+const wrapper = document.getElementById('wrapper1');
+const canvas = document.getElementById('my_canvas');
+const commandinput = document.getElementById('commandinput');
+const ctx = canvas.getContext('2d');
+const w = ctx.canvas.width;
+const h = ctx.canvas.height;
+console.log(`${w}x${h}px`);
+
+const frames = [[]];
+let frame = 0;
+
+const socket = new WebSocket("/ws");
+
+// Connection opened
+socket.addEventListener("open", (event) => {
+  socket.send("Hello Server!");
+});
+
+// Listen for messages
+socket.addEventListener("message", (event) => {
+  console.log("Message from server ", event.data);
+});
+
+function push(instruction) {
+	//TODO: Instead broadcast
+	frames[frame].push(instruction);
+	perform(instruction);
+}
+
+function perform(instruction) {
+	if("function" === typeof ctx[instruction[0]]) {
+		ctx[instruction[0]](...instruction.slice(1));
+	} else {
+		ctx[instruction[0]] = instruction[1];
+	}
+}
+
+const commands = {
+	"help": (args) => {
+		console.log("HELP", `"${args}"`);
+		[
+			 ["fillStyle","black"],["strokeStyle","black"],["font","16px monospace"]
+			,["fillText","help - Display this text",10,20]
+			,["fillText","new [title] - Create new page, optionally providing title",10,40]
+			,["fillText","title <sometext> - Put <sometext> ",10,60]
+			,["fillText","previous - Navigate back (alt+leftArrow)",10,80]
+			,["fillText","next - Navigate forward (alt+rightArrow)",10,100]
+			,["fillText","clear - Clear the page",10,120]
+		].forEach(i => push(i));
+	},
+	"clear": (args) => {
+		console.log(JSON.stringify(frames[frame]));
+		while (frames[frame].length > 0) {
+			console.log(frames[frame].pop());
+		}
+		[["fillStyle", "white"],["strokeStyle", "red"],["lineWidth", 1]
+		,["fillRect", 0, 0, w, h]
+		,["strokeRect", 0, 0, w, h]
+		,["fillStyle","black"],["strokeStyle","black"],["font","8px serif"]
+		,["fillText", frame , 10, h - 10]
+		].forEach(i => push(i));
+	},
+	"new": (title) => {
+		console.log(JSON.stringify(frames[frame]));
+		frames.push([]);
+		frame = frames.length - 1;
+		[["fillStyle", "white"],["strokeStyle", "red"],["lineWidth", 1]
+		,["fillRect", 0, 0, w, h]
+		,["strokeRect", 0, 0, w, h]
+		,["fillStyle","black"],["strokeStyle","black"],["font","8px serif"]
+		,["fillText", frame , 10, h - 10]
+		].forEach(i => push(i));
+		if("string" === typeof title) {
+			push(["fillStyle", "black"]);
+			push(["strokeStyle", "black"]);
+			push(["font", "48px serif"]);
+			push(["fillText", title, 10, 50]);
+		}
+	},
+	"title": (title) => {
+		push(["fillStyle", "black"]);
+		push(["strokeStyle", "black"]);
+		push(["font", "48px serif"]);
+		push(["fillText", title, 10, 50]);
+	},
+	"previous": (args) => {
+		frame = Math.max(0, frame - 1);
+		frames[frame].forEach(i => perform(i));
+	},
+	"next": (args) => {
+		frame = Math.min(frames.length - 1, frame + 1);
+		frames[frame].forEach(i => perform(i));
+	},
+	"say": (text) => {
+		socket.send(`msg:${text}`);
+	}
+}
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) {
+	wrapper.requestFullscreen();
+  } else if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+}
+
+document.addEventListener(
+  "keydown",
+  (e) => {
+    if (e.key === "Enter") {
+		if(e.target === commandinput) {
+			const userInput = commandinput.value;
+			if(userInput.length === 0)
+				return;
+			const spacePos = userInput.indexOf(" ");
+			const [command, args] = spacePos < 1 ? [userInput, null] : [userInput.slice(0,spacePos), userInput.slice(spacePos+1)]
+			
+			if (!commands.hasOwnProperty(command))
+				return;
+			if ("help" === command) {
+				commands.new();
+			}
+			commands[command](args);
+			commandinput.value = "";
+			return;
+		}
+      toggleFullScreen();
+    }
+	else if (e.altKey &&  e.key === "ArrowLeft") {
+		commands.previous();
+	}
+	else if (e.altKey &&  e.key === "ArrowRight") {
+		commands.next();
+	}
+  },
+  false,
+);
+
+
+canvas.addEventListener('mousedown', function (event) {
+  //console.log('mousedown');
+  //console.log(event);
+});
+
+canvas.addEventListener('mouseup', function (event) {
+	//console.log('mouseup');
+	const {left, top} = event.target.getBoundingClientRect();
+	const x = event.clientX - left;
+	const y = event.clientY - top;
+	push(["fillStyle", "lightblue"]);
+	push(["fillStyle", "lightblue"]);
+	push(["strokeStyle", "blue"]);
+	push(["strokeRect", x - 2.5, y - 2.5, 5, 5]);
+});
+commands["new"](null);
+[["fillStyle","white"],["strokeStyle","red"],["lineWidth",1],["fillRect",0,0,640,480],["strokeRect",0,0,640,480]
+	,["fillStyle","black"],["strokeStyle","black"]
+	,["font","48px serif"]
+	,["fillText","Welcome!",10,50]
+	,["font","16px serif"]
+	,["fillText","- Toggle fullscreen mode by hitting enter",20,70]
+	,["fillText","- Enter commands in the input at the bottom (tip: type help and hit enter)",20,90]
+].forEach(i => push(i));
+commandinput.focus();
+</script>
+
+
+<script>
+	const inputUsername = document.querySelector("#inputUsername");
+	inputUsername.focus();
+	document.querySelector("#submitUsername").addEventListener("click", e => {
+		if ("join" == e.target.innerText) {
+			const userName = inputUsername.value;
+			if ("" === userName) 
+				return;
+			join(userName)
+				.then((joinedState, rejectedState) => {
+					console.log("callback after joined", joinedState);
+					inputUsername.disabled = true;
+					e.target.innerText = "leave";
+			});
+		} else {
+			leave()
+				.then(() => {
+					inputUsername.disabled = false;
+					inputUsername.focus();
+					e.target.innerText = "join";
+				});
+		}
+	});
+</script>
+</body>
+</html> 
